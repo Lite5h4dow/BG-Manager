@@ -14,9 +14,11 @@ import parseopt
 
 #Sets ~/wallpaper folder as default target
 let source = getHomeDir()/"Wallpapers"
+proc initialise():void=
+  if not existsDir(source) : #Makes Sure the folder is there
+    createDir(source) #Makes it if it isnt
 
-if not existsDir(source) : #Makes Sure the folder is there
-  createDir(source) #Makes it if it isnt
+initialise()
 
 let wallpapers = toSeq(walkDir(source)) #Makes a Sequence containing the paths of all images in the folder
 var
@@ -34,7 +36,7 @@ proc randomImg():void=
     target ="feh --bg-scale "&wallpapers[random(high(wallpapers))].path #appends full terminal instruction to "target"
     discard execProcess(target)
     #[
-    runs the terminal command (Note execProcess will try to return something, we dont need it so we use discard to run 
+    runs the terminal command (Note execProcess will try to return something, we dont need it so we use discard to run
     the function and get rid of the pesky result, it will cause an error otherwise)
     ]#
     sleep(time*60000) #sleeps for a while (1min by default, might change it)
@@ -96,7 +98,11 @@ for kind, key, val in parse.getopt(): #seperates the arguments in to their indiv
       randomImg()
     of "list", "l": #lists all images that it can display
       listSrc()
+    of "init", "initialise","i":
+      initialise()
   of cmdEnd: assert(false) #Makes sure nothing funky happens (idfk what this does yet, seems pretty vital tho)
   else: #if anyone sees this, they done fucked up.
     echo("idfk something went wrong man.")
     help()
+
+randomImg()
