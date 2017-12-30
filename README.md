@@ -1,4 +1,4 @@
-# BG-Changer
+# BG-Manager
 Background Changer for i3 (might work with other stuff too)
 
 # Usage
