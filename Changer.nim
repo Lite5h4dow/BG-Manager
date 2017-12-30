@@ -94,7 +94,7 @@ for kind, key, val in parse.getopt(): #seperates the arguments in to their indiv
       help()
     of "single","s": #single Image tool (for those that just want one image, idk why you need this but its here)
       singleImg(val)
-    of "random","r": #random image tool
+    of "random","r","": #random image tool
       randomImg()
     of "list", "l": #lists all images that it can display
       listSrc()
@@ -104,5 +104,3 @@ for kind, key, val in parse.getopt(): #seperates the arguments in to their indiv
   else: #if anyone sees this, they done fucked up.
     echo("idfk something went wrong man.")
     help()
-
-randomImg()
