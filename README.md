@@ -7,12 +7,19 @@ On BGchangers initial launch, it will make a folder in your accounts home folder
 on its sencond launch it will detect the images and start scrolling through, one per minute (by default, this can be changed)
 
 # Options
-(Only 2 so far)
 
 `--time, -t`: this will let you change the ammount of time an image is displayed for.
 *E.G. -t=5 or -t:5 = 5 mins/image.*
 
 `--help, -h`: displays help page. (A little lacking rn)
+
+`--single, -s`: Single image mode, if you just want to display one image. no arument will let you choose a file from a list, *e.g. `bgmanager -s`* however with a file name it will look for it in the folder and set that as your background *e.g. `bgmanager -s:image.png` or `-s=image.png`*
+
+`--list, -l`: Lists all the images in the wallpapers folder
+
+`--random, -r`: default randomiser for all images in wallpaper folder
+
+`--init, --initialise, -i`: will rin the initialise section if you want to just make the folder without doing it manually.
 
 # Requirements
 Only Feh, Nim too if you want to compile it yourself.
