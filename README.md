@@ -16,3 +16,5 @@ on its sencond launch it will detect the images and start scrolling through, one
 
 # Requirements
 Only Feh, Nim too if you want to compile it yourself.
+
+Have fun <('-'<)
