@@ -9,10 +9,10 @@ on its sencond launch it will detect the images and start scrolling through, one
 # Options
 (Only 2 so far)
 
-**--time, -t :** this will let you change the ammount of time an image is displayed for.
+`--time, -t`: this will let you change the ammount of time an image is displayed for.
 *E.G. -t=5 or -t:5 = 5 mins/image.*
 
-**--help, -h:** displays help page. (A little lacking rn)
+`--help, -h`: displays help page. (A little lacking rn)
 
 # Requirements
 Only Feh, Nim too if you want to compile it yourself.
