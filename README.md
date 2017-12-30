@@ -1,5 +1,5 @@
 # BG-Changer
-Background Changer for 13 (might work with other stuff too)
+Background Changer for i3 (might work with other stuff too)
 
 # Usage
 On BGchangers initial launch, it will make a folder in your accounts home folder called Wallpapers close the program and move your background images into the folder.
