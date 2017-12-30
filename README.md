@@ -13,3 +13,6 @@ on its sencond launch it will detect the images and start scrolling through, one
 *E.G. -t=5 or -t:5 = 5 mins/image.*
 
 **--help, -h:** displays help page. (A little lacking rn)
+
+# Requirements
+Only Feh, Nim too if you want to compile it yourself.
