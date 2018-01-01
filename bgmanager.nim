@@ -54,7 +54,7 @@ proc listSrc() =
     echo $itter, ": ", extractFilename(item.path)
 
 proc singleImg(i: string) =
-  ##[
+  #[
   Here is the idea for single mode. Since I have already have a file system I
   can use it for name tests. So here is the pseudo code:
   See if user has given a file name with the argument.
@@ -62,7 +62,7 @@ proc singleImg(i: string) =
     you can select own with a number
   If a file name is given it will test the name and then it will display that image.
   If the file name fails to be recognised then it will act as if there was no image given.
-  ]##
+  ]#
 
   var loop = true
   for img in wallpapers:
