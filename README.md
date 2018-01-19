@@ -13,7 +13,8 @@ on its sencond launch it will detect the images and start scrolling through, one
 
 `--help, -h`: displays help page. (A little lacking rn)
 
-`--single, -s`: Single image mode, if you just want to display one image. no arument will let you choose a file from a list, *e.g. `bgmanager -s`* however with a file name it will look for it in the folder and set that as your background *e.g. `bgmanager -s:image.png` or `-s=image.png`*
+`--single, -s`: Single image mode, if you just want to display one image. this arument will let you choose a file from a list, *e.g. `bgmanager -s`* , if you know the number already you can simply append it as an argument *e.g. bgmanager -s:1 or bgmanager -s=1*
+**(Warning: Numbers can change with folder changes, always check after adding or removing a file)**
 
 `--list, -l`: Lists all the images in the wallpapers folder
 
