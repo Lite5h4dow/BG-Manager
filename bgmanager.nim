@@ -15,7 +15,7 @@ include
 #Sets ~/wallpaper folder as default target
 let 
   source = getHomeDir() / "Wallpapers"
-  wallpapers = toSeq(walkDir(source))
+  wallpapers: seq[filePath] = toSeq(walkDir(source))
 
 discard existsOrCreateDir(source)
 
@@ -27,6 +27,18 @@ var
 # Placeholder help
 proc help():void =
   echo("bannannanna batman :P \nWorking Help Diag Incoming")
+
+
+proc runManager(conf: Config):void =
+  case conf.mode:
+    of single:
+      singleImg(conf.singleImage, wallpapers)
+    of randSelect:
+      discard existsOrCreateDir(conf.folderPath)
+      randomImg(conf.imgTimer, toSeq(walkdir(conf.folderPath)))
+    of ordered:
+      echo "not implimented yet. exiting."
+
 
 
 # Argument management:
@@ -61,7 +73,8 @@ for kind, key, val in parse.getopt():
       createConfig()
     #If no option supplied
     of "normal", "n", "":
-      readConfig()
+      var conf = readConfig(source)
+      runManager(conf)
 
 
   # We don't need cmdArgument and cmdEnd indicates that end of command line reached/

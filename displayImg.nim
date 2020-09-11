@@ -3,13 +3,15 @@ import
 
 var mode : seq[string] = @["--bg-scale ", "--bg-tile "]
 
-proc listSrc(wallpapers:seq[tuple[kind:PathComponent, path:string]]):void =
+type filePath = tuple[kind:PathComponent, path:string]
+
+proc listSrc(wallpapers:seq[filePath]):void =
   var counter : int
   for i in wallpapers:
     counter += 1
     echo intToStr(counter) & ": " & i.path
 
-proc singleImg(i: string, wallpapers: seq[tuple[kind:PathComponent, path:string]]):void =
+proc singleImg(i: string, wallpapers: seq[filePath]):void =
   if i == "":
     listSrc(wallpapers)
     while true:
@@ -28,8 +30,21 @@ proc singleImg(i: string, wallpapers: seq[tuple[kind:PathComponent, path:string]
       echo "selection invalid"
 
 
-proc randomImg(timer: int, wallpapers: seq[tuple[kind:PathComponent, path:string]]):void =
+proc randomImg(timer: int, wallpapers: seq[filePath]):void =
+  echo wallpapers
+  if wallpapers.len <= 0:
+    echo "no images in directory"
+    return
+
   while true:
     randomize()
-    discard execProcess("feh " & mode[0] & wallpapers[rand(high(wallpapers))].path)
+    var r = rand(high(wallpapers))
+    var index = 
+      if r < 0:
+        0 
+      elif r > (wallpapers.len() - 1): 
+        (wallpapers.len() - 1)
+      else: r
+    var selection = wallpapers[index]
+    discard execProcess("feh " & mode[0] & selection.path)
     sleep(timer * 60000)
