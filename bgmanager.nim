@@ -7,56 +7,26 @@
 ]#
 
 import
-  osproc, os, ospaths, sequtils, strutils, random, parseopt
+  osproc, os, sequtils, strutils, random, parseopt, streams
+
+include 
+  displayImg, config
 
 #Sets ~/wallpaper folder as default target
-let source = getHomeDir() / "Wallpapers"
+let 
+  source = getHomeDir() / "Wallpapers"
+  wallpapers = toSeq(walkDir(source))
 
 discard existsOrCreateDir(source)
 
-let wallpapers = toSeq(walkDir(source))
-
 var
-  mode : seq[string]
   parse = initOptParser("") # Gets commandline arguments(--long -s)
   time = 1 # Default time to switch between wallpapers
-  loop = true
 
-mode = @["--bg-scale ", "--bg-tile "]
 
 # Placeholder help
-proc help() =
+proc help():void =
   echo("bannannanna batman :P \nWorking Help Diag Incoming")
-
-proc randomImg() =
-  while true:
-    randomize()
-    discard execProcess("feh " & mode[0] & wallpapers[random(high(wallpapers))].path)
-    sleep(time * 60000)
-
-proc listSrc() =
-  var counter : int
-  for i in wallpapers:
-    counter += 1
-    echo intToStr(counter) & ": " & i.path
-
-proc singleImg(i: string) =
-  if i == "":
-    listSrc()
-    while loop == true:
-      loop = false
-      echo "Select an image (1-" & intToStr(high(wallpapers) + 1) & "): "
-      var select = readLine(stdin)
-      if parseInt(select) - 1  < high(wallpapers) :
-        discard execProcess("feh " & mode[0] & wallpapers[parseInt(select) - 1].path)
-      else:
-        echo "Please a Valid Entry"
-        loop = true
-  else:
-    if parseInt(i) - 1 < high(wallpapers) :
-      discard execProcess("feh " & mode[0] & wallpapers[parseInt(i) - 1].path)
-    else:
-      echo "selection invalid"
 
 
 # Argument management:
@@ -76,15 +46,23 @@ for kind, key, val in parse.getopt():
       help()
     # Single image tool (for those that just want one image, idk why you need this but its here)
     of "single", "s":
-      echo()
-      singleImg(val)
+      singleImg(val, wallpapers)
     # Random image tool
-    of "random", "r", "":
-      randomImg()
+    of "random", "r":
+      randomImg(if val == "": time else: parseInt(val), wallpapers)
     # Lists all images that it can display
     of "list", "l":
-      listSrc()
+      listSrc(wallpapers)
+    #runs initialise system
     of "init", "initialise", "i":
       discard existsOrCreateDir(source)
-  # We don't need cmdArgument and cmdEnd indicates that end of command line reached
+    #runs the config creation
+    of "config","c":
+      createConfig()
+    #If no option supplied
+    of "normal", "n", "":
+      readConfig()
+
+
+  # We don't need cmdArgument and cmdEnd indicates that end of command line reached/
   of cmdArgument, cmdEnd: assert(false)
