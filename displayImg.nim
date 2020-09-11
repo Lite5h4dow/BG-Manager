@@ -31,7 +31,6 @@ proc singleImg(i: string, wallpapers: seq[filePath]):void =
 
 
 proc randomImg(timer: int, wallpapers: seq[filePath]):void =
-  echo wallpapers
   if wallpapers.len <= 0:
     echo "no images in directory"
     return
